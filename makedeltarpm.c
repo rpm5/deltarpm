@@ -780,7 +780,7 @@ main(int argc, char **argv)
         paycomp = str2comp(compopt);
       if (c2)
 	{
-	  if (!strcmp(c2, "off") != 0)
+	  if ((!strcmp(c2, "off")) != 0)
 	    addblkcomp = -1;
 	  else
 	    addblkcomp = str2comp(c2);

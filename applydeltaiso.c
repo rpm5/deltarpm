@@ -17,6 +17,7 @@
 #include <bzlib.h>
 #include <lzma.h>
 
+#include "rpmoffs.h"
 #include "util.h"
 #include "md5.h"
 #include "cfile.h"

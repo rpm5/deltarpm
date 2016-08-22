@@ -17,6 +17,14 @@
 #include <lzma.h>
 #include <bzlib.h>
 
+#ifdef  __APPLE__
+typedef off_t off64_t;
+#define fseeko64        fseeko
+#define ftello64        ftello
+#define fopen64         fopen
+#define ftruncate64     ftruncate
+#endif
+
 #include "rpmhead.h"
 #include "md5.h"
 #include "util.h"

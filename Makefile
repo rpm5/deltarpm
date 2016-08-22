@@ -1,5 +1,6 @@
-prefix=/usr/local
+prefix=/opt/local
 bindir=$(prefix)/bin
+incdir=$(prefix)/include
 libdir=$(prefix)/lib
 mandir=$(prefix)/man
 rpmdumpheader=$(bindir)/rpmdumpheader
@@ -9,7 +10,7 @@ zlibldflags=$(zlibbundled)
 zlibcppflags=-I$(zlibdir)
 pylibprefix=/
 CFLAGS = -fPIC -O2 -Wall -g
-CPPFLAGS = -fPIC -DDELTARPM_64BIT -DBSDIFF_NO_SUF -DRPMDUMPHEADER=\"$(rpmdumpheader)\" $(zlibcppflags)
+CPPFLAGS = -fPIC -DRPM5=1 -DBSDIFF_NO_SUF -DRPMDUMPHEADER=\"$(rpmdumpheader)\" -I$(incdir) -I$(incdir)/rpm $(zlibcppflags)
 LDLIBS = -lbz2 $(zlibldflags) -llzma
 LDFLAGS =
 PYTHONS = python python3
@@ -25,7 +26,7 @@ applydeltarpm: applydeltarpm.o readdeltarpm.o md5.o sha256.o util.o rpmhead.o cp
 combinedeltarpm: combinedeltarpm.o md5.o util.o rpmhead.o cfile.o readdeltarpm.o writedeltarpm.o $(zlibbundled)
 
 rpmdumpheader: rpmdumpheader.o
-	$(CC) $(LDFLAGS) $^ -lrpm -lrpmio -o $@
+	$(CC) $(LDFLAGS) $^ -L$(libdir) -lrpm -lrpmdb -lrpmio -lrpmmisc -o $@
 
 makedeltaiso: makedeltaiso.o delta.o rpmoffs.o rpmhead.o util.o md5.o cfile.o $(zlibbundled)
 

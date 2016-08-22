@@ -1,4 +1,11 @@
 
+#ifdef  __APPLE__
+typedef off_t off64_t;
+#define fseeko64        fseeko
+#define ftello64        ftello
+#define fopen64         fopen
+#endif
+
 struct rpmpay {
   char *name;
   unsigned int x;
